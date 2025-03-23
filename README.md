@@ -28,7 +28,7 @@ This version uses Docker Compose to run our Node web application. It pulls the N
 ```bash
 cd dockerhub-express-app
 docker-compose up --build
-
+```
 ---
 
 ## 2. cg-express-app
@@ -41,7 +41,7 @@ This version uses Docker Compose to run our Node web application. It pulls the N
 ```bash
 cd cg-express-app
 docker-compose up --build
-
+```
 ---
 
 ##3 container-scan-app
@@ -58,7 +58,7 @@ curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.17.0/kind-linux-amd64
 chmod +x ./kind
 sudo mv ./kind /usr/local/bin/kind
 kind create cluster --config kind-cluster.yaml
-
+```
 **Usage:**
 
 ```bash
@@ -67,10 +67,10 @@ helm install my-app ./container-scan-app
 kubectl get pods # wait for the pods to all come up to a 'running' state
 kubectl port-forward svc/my-app-container-scan-app-nginx 30080:80
 hit http://localhost:30080
-
+```
 ---
 
-##3 cg-container-scan-app
+##4 cg-container-scan-app
 
 **Description:**  
 This version uses Docker Compose to run our Node web application. This deploys the set of postgres, nginx, and node from Chainguards image registry - you can see this in the values.yaml file.
@@ -86,3 +86,4 @@ helm install my-app-cg ./cg-container-scan-app
 kubectl get pods # wait for the pods to all come up to a 'running' state
 kubectl port-forward svc/my-app-cg-container-scan-app-nginx 30080:80
 hit http://localhost:30080
+```
