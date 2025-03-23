@@ -44,7 +44,7 @@ docker-compose up --build
 ```
 ---
 
-##3 container-scan-app
+## 3. container-scan-app
 
 **Description:**  
 This version uses Docker Compose to run our Node web application. This deploys the set of postgres, nginx, and node from Docker Hub - you can see this in the values.yaml file.
@@ -71,7 +71,7 @@ you can now hit the application in your browser: http://localhost:30080
 
 ---
 
-##4 cg-container-scan-app
+## 4. cg-container-scan-app
 
 **Description:**  
 This version uses Docker Compose to run our Node web application. This deploys the set of postgres, nginx, and node from Chainguards image registry - you can see this in the values.yaml file.
