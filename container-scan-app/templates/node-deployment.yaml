@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "container-scan-app.fullname" . }}-node
+  labels:
+    app: {{ include "container-scan-app.name" . }}
+    tier: backend
+    component: node
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "container-scan-app.name" . }}
+      component: node
+  template:
+    metadata:
+      labels:
+        app: {{ include "container-scan-app.name" . }}
+        component: node
+    spec:
+      containers:
+        - name: node
+          image: "{{ .Values.node.image.repository }}:{{ .Values.node.image.tag }}"
+          env:
+            - name: DB_HOST
+              value: "{{ .Values.node.env.DB_HOST }}"
+            - name: DB_USER
+              value: "{{ .Values.node.env.DB_USER }}"
+            - name: DB_PASSWORD
+              value: "{{ .Values.node.env.DB_PASSWORD }}"
+            - name: DB_NAME
+              value: "{{ .Values.node.env.DB_NAME }}"
+          ports:
+            - containerPort: {{ .Values.node.service.port }}
+          volumeMounts:
+            {{- if .Values.node.dockerSocket.enabled }}
+            - name: docker-socket
+              mountPath: /var/run/docker.sock
+            {{- end }}
+      volumes:
+        {{- if .Values.node.dockerSocket.enabled }}
+        - name: docker-socket
+          hostPath:
+            path: {{ .Values.node.dockerSocket.hostPath }}
+        {{- end }}

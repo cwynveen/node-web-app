@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "container-scan-app.fullname" . }}-nginx
+  labels:
+    app: {{ include "container-scan-app.name" . }}
+    tier: frontend
+    component: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ include "container-scan-app.name" . }}
+      component: nginx
+  template:
+    metadata:
+      labels:
+        app: {{ include "container-scan-app.name" . }}
+        component: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: "{{ .Values.nginx.image.repository }}:{{ .Values.nginx.image.tag }}"
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: nginx-config
+              mountPath: /etc/nginx/conf.d
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: {{ include "container-scan-app.fullname" . }}-nginx-config

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: container-scan-app
+description: A Helm chart for deploying an application that includes Postgres, a Node web server (with Grype scan), and Nginx as a reverse proxy.
+type: application
+version: 0.1.0
+appVersion: "1.0"

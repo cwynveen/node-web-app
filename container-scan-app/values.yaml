@@ -1,0 +1,49 @@
+replicaCount: 1
+
+postgres:
+  image:
+    repository: postgres
+    tag: latest
+  env:
+    POSTGRES_USER: myuser
+    POSTGRES_PASSWORD: mypassword
+    POSTGRES_DB: mydb
+  persistence:
+    enabled: true
+    storageClass: ""
+    accessMode: ReadWriteOnce
+    size: 1Gi
+
+node:
+  image:
+    # Replace with your image repository (ensure the image is available to the cluster)
+    repository: cwynveen/cg-demos
+    tag: dockerhub-node-app
+  service:
+    port: 3000
+  env:
+    DB_HOST: postgres
+    DB_USER: myuser
+    DB_PASSWORD: mypassword
+    DB_NAME: mydb
+  dockerSocket:
+    enabled: true
+    hostPath: /var/run/docker.sock
+
+nginx:
+  image:
+    repository: nginx
+    tag: latest
+  service:
+    port: 80
+  config:
+    default: |-
+      server {
+          listen 80;
+      
+          location / {
+              proxy_pass http://my-app-container-scan-app-node:3000;
+              proxy_set_header Host $host;
+              proxy_set_header X-Real-IP $remote_addr;
+          }
+      }

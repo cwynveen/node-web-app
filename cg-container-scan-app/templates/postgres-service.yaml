@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "container-scan-app.fullname" . }}-postgres
+  labels:
+    app: {{ include "container-scan-app.name" . }}
+    component: postgres
+spec:
+  ports:
+    - port: 5432
+      targetPort: 5432
+  selector:
+    app: {{ include "container-scan-app.name" . }}
+    component: postgres
