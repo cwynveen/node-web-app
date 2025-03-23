@@ -66,8 +66,9 @@ cd node-web-app
 helm install my-app ./container-scan-app
 kubectl get pods # wait for the pods to all come up to a 'running' state
 kubectl port-forward svc/my-app-container-scan-app-nginx 30080:80
-hit http://localhost:30080
 ```
+you can now hit the application in your browser: http://localhost:30080
+
 ---
 
 ##4 cg-container-scan-app
@@ -85,5 +86,6 @@ cd node-web-app
 helm install my-app-cg ./cg-container-scan-app
 kubectl get pods # wait for the pods to all come up to a 'running' state
 kubectl port-forward svc/my-app-cg-container-scan-app-nginx 30080:80
-hit http://localhost:30080
 ```
+you can now hit the application in your browser: http://localhost:30080
+
