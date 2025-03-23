@@ -1,6 +1,6 @@
 # Example Node Web App Deployments
 
-This repository demonstrates four different deployment versions of our Node web application. Each folder represents a distinct approach and image source.
+This repository demonstrates four different deployment versions of our Node web application. The Node Web application allows us to run a Grype scan on the base image out application is built on top of to illustrate how important it is to start from a secure and minimal base image.
 
 ## Folder Overview
 
