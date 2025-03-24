@@ -28,6 +28,8 @@ spec:
               value: "{{ .Values.postgres.env.POSTGRES_PASSWORD }}"
             - name: POSTGRES_DB
               value: "{{ .Values.postgres.env.POSTGRES_DB }}"
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
           ports:
             - containerPort: 5432
           volumeMounts:
